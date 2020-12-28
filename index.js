@@ -14,10 +14,18 @@ function removeTransition(event) {
     this.classList.remove("playing")
 }
 
+const clicked = (event) => {
+  event.target.parentNode.classList.add("playing")
+  const audio = document.querySelector(`.${event.target.textContent}`)
+  if(!audio) return // stops the function from  running
+  audio.currentTime = 0; //rewind to the start 
+  audio.play();
+} 
 const keys = document.querySelectorAll(".key")
 
 for (let key of keys) {
    key.addEventListener('transitionend', removeTransition)
 }
+window.addEventListener("click", clicked)
 
 window.addEventListener('keydown', playSound)
